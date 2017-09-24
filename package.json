@@ -1,0 +1,22 @@
+{
+  "name": "profiles-github",
+  "version": "1.0.0",
+  "description": "Fetch and Display Github User Info",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aakash Choubey",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "7.0.0",
+    "babel-preset-react": "^6.24.1",
+    "webpack": "2.6.1",
+    "webpack-dev-server": "^2.4.5"
+  },
+  "dependencies": {
+    "react": "0.14.9",
+    "react-dom": "0.14.9"
+  }
+}
