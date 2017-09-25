@@ -52,7 +52,7 @@ class Profile extends Component{
                         </div>
                         <hr />
                         <h3 className="card-title">User Repositories</h3>
-                        <RepoList userRepos={this.props.userRepos} />
+                        <RepoList userRepos={this.props.userRepos} perPage={this.props.perPage} showMoreClick={this.props.showMoreClick.bind(this)} publicRepos={this.props.userData.public_repos}/>
                     </div>
                 </div>
             </div>

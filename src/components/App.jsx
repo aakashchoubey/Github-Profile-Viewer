@@ -10,7 +10,7 @@ class App extends Component{
             username: 'choubeyaakash77',
             userData: [],
             userRepos: [],
-            perPage: 10
+            perPage: 5
         }
     }
 
@@ -61,11 +61,19 @@ class App extends Component{
         this.getUserRepos();
     }
 
+    showMoreClick(e){
+        e.preventDefault();
+        console.log(this.state.perPage);
+        this.state.perPage += 5;
+        this.getUserRepos();
+    }
+
     render() {
         return (
             <div>
                 <Search onFormSubmit = {this.handleFormSubmit.bind(this)}/>
-                <Profile {...this.state}/>
+                <Profile {...this.state} showMoreClick={this.showMoreClick.bind(this)}/>
+                <br />
             </div>
         )
     }

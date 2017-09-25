@@ -1,11 +1,24 @@
 import React,{Component} from'react';
 import Repo from './Repo.jsx'
 
+class ShowMore extends Component{
+    render(){
+        //console.log(this.props.perPage+"..."+this.props.publicRepos);
+        //console.log(this.props.userRepos.length);
+        if(this.props.publicRepos<=this.props.perPage){
+            return null;
+        }
+        return (
+            <a href="#" onClick={this.props.showMoreClick.bind(this)} className="btn btn-primary show-more-btn">Show More</a>
+        )
+    }
+}
+
 class RepoList extends Component{
 
     render() {
         return (
-            <div>
+            <div style={{textAlign:"center"}}>
                 <ul className="list-group">
                     {
                         this.props.userRepos.map(repo => {
@@ -17,6 +30,8 @@ class RepoList extends Component{
                         })
                     }
                 </ul>
+                <br />
+                <ShowMore {...this.props} showMoreClick={this.props.showMoreClick.bind(this)}/>
             </div>
         )
     }
