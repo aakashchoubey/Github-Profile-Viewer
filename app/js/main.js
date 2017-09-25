@@ -10863,7 +10863,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom__ = __webpack_require__(58);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_App_jsx__ = __webpack_require__(88);
-console.log('App running');
+console.log('Github Profile Viewer | Made by Aakash');
 
 
 
@@ -10881,6 +10881,8 @@ __WEBPACK_IMPORTED_MODULE_1_react_dom___default.a.render(__WEBPACK_IMPORTED_MODU
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_dom___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react_dom__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__github_Profile_jsx__ = __webpack_require__(89);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__github_Search_jsx__ = __webpack_require__(92);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 
 
 
@@ -10893,7 +10895,7 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
             username: 'choubeyaakash77',
             userData: [],
             userRepos: [],
-            perPage: 10
+            perPage: 5
         };
     }
 
@@ -10944,12 +10946,20 @@ class App extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
         this.getUserRepos();
     }
 
+    showMoreClick(e) {
+        e.preventDefault();
+        console.log(this.state.perPage);
+        this.state.perPage += 5;
+        this.getUserRepos();
+    }
+
     render() {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
             null,
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__github_Search_jsx__["a" /* default */], { onFormSubmit: this.handleFormSubmit.bind(this) }),
-            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__github_Profile_jsx__["a" /* default */], this.state)
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__github_Profile_jsx__["a" /* default */], _extends({}, this.state, { showMoreClick: this.showMoreClick.bind(this) })),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null)
         );
     }
 }
@@ -11105,7 +11115,7 @@ class Profile extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
                         { className: 'card-title' },
                         'User Repositories'
                     ),
-                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__RepoList_jsx__["a" /* default */], { userRepos: this.props.userRepos })
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_1__RepoList_jsx__["a" /* default */], { userRepos: this.props.userRepos, perPage: this.props.perPage, showMoreClick: this.props.showMoreClick.bind(this), publicRepos: this.props.userData.public_repos })
                 )
             )
         );
@@ -11155,12 +11165,27 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
 
 
 
+class ShowMore extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
+    render() {
+        //console.log(this.props.perPage+"..."+this.props.publicRepos);
+        //console.log(this.props.userRepos.length);
+        if (this.props.publicRepos <= this.props.perPage) {
+            return null;
+        }
+        return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+            'a',
+            { href: '#', onClick: this.props.showMoreClick.bind(this), className: 'btn btn-primary show-more-btn' },
+            'Show More'
+        );
+    }
+}
+
 class RepoList extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
 
     render() {
         return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
             'div',
-            null,
+            { style: { textAlign: "center" } },
             __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                 'ul',
                 { className: 'list-group' },
@@ -11170,7 +11195,9 @@ class RepoList extends __WEBPACK_IMPORTED_MODULE_0_react__["Component"] {
                         key: repo.id
                     }, this.props));
                 })
-            )
+            ),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('br', null),
+            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(ShowMore, _extends({}, this.props, { showMoreClick: this.props.showMoreClick.bind(this) }))
         );
     }
 }
